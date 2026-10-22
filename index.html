@@ -1,0 +1,1299 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2033 台北來生夜店 AFTERLIFE // TAIPEI ENCORE · Colorfigures 3D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,600;0,700;1,700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --club-bg: #0d0e1a;
+      --panel: #15172b;
+      --paper: #f2efe7;
+      --ink: #120e1a;
+      --neon-cyan: #00f0ff;
+      --neon-pink: #ff2a85;
+      --neon-gold: #ffd026;
+      --neon-green: #00ff9d;
+      --text-main: #f5f3ec;
+      --muted: #989ec2;
+      --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Noto Sans TC", monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      background-color: var(--club-bg);
+      background-image:
+        radial-gradient(circle at 50% 24%, rgba(255, 42, 133, 0.16), transparent 52%),
+        radial-gradient(circle at 50% 62%, rgba(0, 240, 255, 0.12), transparent 60%),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .6  .08 0 0 0 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>");
+      color: var(--text-main);
+      font: 13px/1.45 var(--mono);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 14px 16px 28px;
+      overflow-x: hidden;
+      transition: background-color 0.35s ease;
+    }
+    body.paper-mode {
+      --text-main: #231e16;
+      --muted: #706858;
+      --panel: #f8f6f0;
+    }
+
+    /* Top Header Bar */
+    header.top-bar {
+      width: 100%;
+      max-width: 1080px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-bottom: 10px;
+      border-bottom: 1.5px solid rgba(0, 240, 255, 0.28);
+    }
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .brand-badge {
+      background: var(--neon-pink);
+      color: #fff;
+      font-weight: 900;
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1.5px solid var(--ink);
+      box-shadow: 2px 2px 0 var(--ink);
+      letter-spacing: 0.08em;
+    }
+    header h1 {
+      font-size: 15px;
+      font-weight: 900;
+      margin: 0;
+      letter-spacing: 0.03em;
+    }
+    header .sub-loc {
+      color: var(--neon-cyan);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    body.paper-mode header .sub-loc { color: #cf5038; }
+
+    /* Audio & Archive Top Controls */
+    .top-tools {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .pill-btn {
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--ink);
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      padding: 5px 13px;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.1s, background 0.15s;
+      white-space: nowrap;
+    }
+    .pill-btn:hover {
+      background: var(--neon-gold);
+      transform: translate(-1px, -1px);
+    }
+    .pill-btn.active {
+      background: var(--neon-cyan);
+      color: var(--ink);
+    }
+    .pill-btn.pink {
+      background: var(--neon-pink);
+      color: #fff;
+    }
+    select.track-select {
+      font: inherit;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--ink);
+      background: #fff4d6;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      padding: 5px 12px;
+      box-shadow: 3px 3px 0 var(--ink);
+      cursor: pointer;
+    }
+
+    /* Live Lyrics & Beat Bar */
+    .lyrics-bar {
+      width: 100%;
+      max-width: 1080px;
+      margin: 8px 0 6px;
+      padding: 6px 14px;
+      background: rgba(18, 14, 26, 0.85);
+      border: 1.5px solid var(--neon-cyan);
+      border-radius: 10px;
+      box-shadow: 3px 3px 0 var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .lyrics-text {
+      font-weight: 800;
+      font-size: 12.5px;
+      color: var(--neon-gold);
+      letter-spacing: 0.04em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .eq-mini {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 16px;
+      flex: none;
+    }
+    .eq-mini span {
+      width: 4px;
+      height: 6px;
+      background: var(--neon-pink);
+      border-radius: 2px;
+      transition: height 0.08s ease;
+    }
+
+    /* Main Stage Container (Colorfigures style) */
+    .stage {
+      position: relative;
+      width: 100%;
+      max-width: 1080px;
+      border: 2.5px solid var(--ink);
+      border-radius: 18px;
+      box-shadow: 6px 6px 0 var(--ink), 0 0 28px rgba(0, 240, 255, 0.16);
+      background: rgba(13, 14, 26, 0.55);
+      overflow: hidden;
+    }
+    body.paper-mode .stage {
+      background: #f8f6f0;
+      box-shadow: 6px 6px 0 #231e16;
+    }
+
+    /* Left Interactive Action Buttons (Colorfigures .actions) */
+    .actions {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      z-index: 5;
+    }
+    .actions .cap {
+      color: var(--neon-cyan);
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(18, 14, 26, 0.82);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .stepwrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .act-btn {
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--ink);
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      padding: 5px 13px;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+      white-space: nowrap;
+      transition: transform 0.1s, background 0.15s;
+    }
+    .act-btn:hover {
+      background: var(--neon-gold);
+      transform: translate(-1px, -1px);
+    }
+    .chips {
+      display: none;
+      flex-wrap: wrap;
+      gap: 6px;
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      box-shadow: 4px 4px 0 var(--ink);
+      padding: 9px;
+      width: max-content;
+      max-width: min(360px, 78vw);
+      position: absolute;
+      left: calc(100% + 8px);
+      top: -2px;
+      z-index: 10;
+    }
+    .stepwrap.open .chips { display: flex; }
+    .chip {
+      font: inherit;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--ink);
+      background: #fff9e6;
+      border: 1.5px solid var(--ink);
+      border-radius: 8px;
+      padding: 4px 9px;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+    .chip:hover {
+      background: var(--neon-cyan);
+      transform: translate(-1px, -1px);
+    }
+    .chip.current {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    /* Top-Right See-through / Labels + Stats (Colorfigures .vset + .stats) */
+    .right-hud {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .vrow {
+      display: flex;
+      gap: 6px;
+      pointer-events: auto;
+    }
+    .vrow .act-btn[aria-pressed="true"] {
+      background: var(--neon-cyan);
+      color: var(--ink);
+    }
+    .stats {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      text-align: right;
+      background: rgba(18, 14, 26, 0.78);
+      border: 1.5px solid rgba(255, 208, 38, 0.45);
+      padding: 7px 11px;
+      border-radius: 12px;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .stat .k {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--neon-cyan);
+    }
+    .stat .v {
+      font-size: 19px;
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--neon-gold);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Toast Notice on Stage */
+    .toast {
+      position: absolute;
+      left: 50%;
+      top: 14px;
+      transform: translate(-50%, -6px);
+      z-index: 8;
+      background: #fff1bf;
+      color: #120e1a;
+      border: 2px solid #120e1a;
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-weight: 900;
+      font-size: 12px;
+      box-shadow: 3px 3px 0 #120e1a;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* SVG 3D Viewport */
+    .zwrap {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+    #fig {
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: grab;
+      user-select: none;
+      touch-action: pan-y;
+      transform-origin: 0 0;
+    }
+    #fig.drag { cursor: grabbing; }
+
+    /* Zoom Chip (Colorfigures bottom-right) */
+    .zchip {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      font: 800 11.5px var(--mono);
+      background: var(--paper);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      padding: 2px 4px;
+      box-shadow: 3px 3px 0 var(--ink);
+      z-index: 5;
+    }
+    .zchip button {
+      all: unset;
+      cursor: pointer;
+      min-width: 24px;
+      height: 22px;
+      line-height: 22px;
+      text-align: center;
+      border-radius: 999px;
+      font-weight: 900;
+    }
+    .zchip button:hover { background: var(--neon-gold); }
+    .zchip .zp { min-width: 46px; }
+
+    /* Bottom Controls Grid (Colorfigures .controls) */
+    .controls {
+      width: 100%;
+      max-width: 1080px;
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px 22px;
+      background: rgba(21, 23, 43, 0.85);
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      padding: 12px 16px;
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+    body.paper-mode .controls {
+      background: #ebe6da;
+    }
+    .ctl {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .ctl label {
+      color: var(--neon-cyan);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    body.paper-mode .ctl label { color: #4a4339; }
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--neon-pink);
+      cursor: pointer;
+    }
+    .row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .ctrl-btn {
+      font: inherit;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      padding: 4px 11px;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+    .ctrl-btn:hover { background: var(--neon-gold); }
+    .ctrl-btn[aria-pressed="true"] {
+      background: var(--neon-cyan);
+      color: var(--ink);
+    }
+    .sw {
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      border-radius: 50%;
+      border: 2px solid var(--ink);
+      cursor: pointer;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+    .sw[aria-pressed="true"] {
+      outline: 3px solid var(--neon-gold);
+      outline-offset: 2px;
+    }
+
+    /* Policy & Campaign Flyers Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 5, 12, 0.82);
+      backdrop-filter: blur(6px);
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-card {
+      background: #141629;
+      color: #f5f3ec;
+      border: 3px solid var(--neon-cyan);
+      border-radius: 18px;
+      box-shadow: 8px 8px 0 #000;
+      max-width: 980px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 20px 24px;
+    }
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1.5px solid rgba(0, 240, 255, 0.3);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+    .flyer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .flyer-box {
+      background: #0d0e1a;
+      border: 2px solid var(--neon-gold);
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+    }
+    .flyer-box img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1.5px solid #000;
+    }
+    .policy-list-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 10px;
+    }
+    .pol-card {
+      background: #1c1f38;
+      border: 1.5px solid rgba(0, 240, 255, 0.4);
+      border-radius: 10px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: transform 0.12s, border-color 0.12s;
+    }
+    .pol-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--neon-gold);
+      background: #25294a;
+    }
+    .pol-card h4 {
+      margin: 0 0 4px;
+      color: var(--neon-gold);
+      font-size: 13px;
+    }
+    .pol-card p {
+      margin: 0;
+      font-size: 11.5px;
+      color: #d8ddf0;
+    }
+
+    @media (max-width: 720px) {
+      .actions { position: static; flex-direction: row; flex-wrap: wrap; padding: 8px; }
+      .right-hud { position: static; flex-direction: row; justify-content: space-between; width: 100%; padding: 0 8px 8px; }
+      .chips { left: 0; top: calc(100% + 6px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="brand-title">
+      <span class="brand-badge">AFTERLIFE 2033 來生夜店</span>
+      <h1>Fig. 2033 — 台北 AI 園區「來生」中央舞台 (蔣萬安 × 台北安可)</h1>
+      <span class="sub-loc">📍 松山機場遷移舊址 870 公頃・Colorfigures 3D Hand-Inked Render</span>
+    </div>
+    <div class="top-tools">
+      <button class="pill-btn pink" id="audioToggleBtn">🔊 播放《台北安可》</button>
+      <select class="track-select" id="trackSelect" aria-label="選擇台北安可音軌">
+        <option value="official">🎵 台北安可 (2026 蔣萬安官方競選版)</option>
+        <option value="rchord">🎸 台北安可 (謝和弦 R-chord 搖滾版)</option>
+        <option value="synth">🎹 台北安可 2033 (Afterlife Cyber-Synth)</option>
+      </select>
+      <button class="pill-btn" id="ttsToggleBtn" aria-pressed="false">🗣️ 政見語音: 關</button>
+      <button class="pill-btn" id="openArchiveBtn">📋 政見與四年政績圖庫</button>
+    </div>
+  </header>
+
+  <!-- Live《台北安可》Lyrics Ticker & Beat Equalizer -->
+  <div class="lyrics-bar">
+    <div class="lyrics-text" id="lyricsTicker">🎵 《台北安可 TAIPEI ENCORE》— 台北安可！我們有大巨蛋、輝達、還有生生鮮奶喔！遷移松山機場讓 GD 跟黃仁勳坐機捷來台北只要 36 分鐘！</div>
+    <div class="eq-mini" id="eqMini">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <!-- Main 3D Stage (Colorfigures Structure) -->
+  <div class="stage">
+    <!-- Left Interactive Buttons -->
+    <div class="actions" id="btns">
+      <div class="cap">互動舞台控制 · 點擊角色或按鈕</div>
+
+      <!-- 1. MJ Dance Mode Picker -->
+      <div class="stepwrap" id="wrapDance">
+        <button class="act-btn" id="btnDance">🕺 麥可舞步切換 ▾</button>
+        <div class="chips" id="chipsDance"></div>
+      </div>
+
+      <!-- 2. Launch 3D Policy Picker -->
+      <div class="stepwrap" id="wrapPolicy">
+        <button class="act-btn" id="btnPolicy">📢 發射 3D 政見大字 ▾</button>
+        <div class="chips" id="chipsPolicy"></div>
+      </div>
+
+      <!-- 3. Next Policy Immediate Trigger -->
+      <div class="stepwrap">
+        <button class="act-btn" id="btnNextPolicy">🚀 飛入下一條 3D 政見</button>
+      </div>
+
+      <!-- 4. Crowd Cheer Wave -->
+      <div class="stepwrap">
+        <button class="act-btn" id="btnCrowdWave">🙌 萬頭鑽動尖叫＋換政績感謝</button>
+      </div>
+
+      <!-- 5. Cryo Fresh Milk Jet -->
+      <div class="stepwrap">
+        <button class="act-btn" id="btnCryo">🥛 噴射生生鮮奶冷霧</button>
+      </div>
+    </div>
+
+    <!-- Right See-through / Labels + Stats -->
+    <div class="right-hud">
+      <div class="vrow">
+        <button class="act-btn" id="xrb" aria-pressed="false">🔍 See-through 透視結構</button>
+        <button class="act-btn" id="lblb" aria-pressed="true">🏷️ Labels 工程標籤</button>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <div class="k">松機遷移 AI 園區</div>
+          <div class="v" id="statMain">870 公頃</div>
+        </div>
+        <div class="stat">
+          <div class="k">公辦都更門檻 / 容積</div>
+          <div class="v" id="statSub">75%➔50% (300%)</div>
+        </div>
+        <div class="stat">
+          <div class="k">萬安 MJ 旋轉圈數</div>
+          <div class="v" id="statSpins">1,128 圈</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center Toast -->
+    <div class="toast" id="toast" role="status"></div>
+
+    <!-- 3D SVG Canvas with Colorfigures #hand Wobble & Grain Filter -->
+    <div class="zwrap" id="zwrap">
+      <svg id="fig" viewBox="0 0 960 640" role="img" aria-label="2033 台北來生夜店 蔣萬安中央舞台 3D 場景">
+        <defs id="fdefs">
+          <filter id="hand" x="-4%" y="-4%" width="108%" height="108%" color-interpolation-filters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.028" numOctaves="2" seed="4" result="warp"/>
+            <feDisplacementMap id="wob" in="SourceGraphic" in2="warp" scale="2.2" xChannelSelector="R" yChannelSelector="G" result="wob"/>
+            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="2" seed="11" result="n1"/>
+            <feColorMatrix in="n1" type="matrix" values=".2 0 0 0 .88  .2 0 0 0 .88  .2 0 0 0 .88  0 0 0 0 1" result="grain"/>
+            <feBlend in="wob" in2="grain" mode="multiply" result="g1"/>
+            <feComposite in="g1" in2="wob" operator="in"/>
+          </filter>
+        </defs>
+        <g id="art" filter="url(#hand)"></g>
+      </svg>
+      <div class="zchip">
+        <button id="zoomOut" aria-label="縮小">−</button>
+        <button class="zp" id="zoomReset" aria-label="重設縮放">100%</button>
+        <button id="zoomIn" aria-label="放大">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Colorfigures Controls Bar -->
+  <div class="controls">
+    <div class="ctl">
+      <label for="wb">Hand-drawn wobble (Colorfigures 手繪線條抖動)</label>
+      <input id="wb" type="range" min="0" max="6.5" step="0.1" value="2.2">
+    </div>
+    <div class="ctl">
+      <label>Palette (來生夜店配色 / 經典暖紙)</label>
+      <div class="row" id="pals"></div>
+    </div>
+    <div class="ctl">
+      <label>3D 鏡頭視角 (拖曳畫面可 360° 自由旋轉)</label>
+      <div class="row">
+        <button class="ctrl-btn" id="camFront" aria-pressed="true">面對中央舞台 POV</button>
+        <button class="ctrl-btn" id="camIso" aria-pressed="false">Colorfigures 45° 等軸</button>
+        <button class="ctrl-btn" id="camPit" aria-pressed="false">搖滾區仰角</button>
+        <button class="ctrl-btn" id="camSpin" aria-pressed="false">360° 環繞</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden HTML5 Audio Element for《台北安可》Looping Playback -->
+  <audio id="bgAudio" src="assets/taipei_encore_official.mp3" loop preload="auto" crossorigin="anonymous"></audio>
+
+  <!-- Policy & Campaign Flyer Archive Modal -->
+  <div class="modal-backdrop" id="archiveModal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <h2 style="margin:0;color:var(--neon-gold);font-size:18px;">📁 2033 台北 AI 園區 × 都更再升級 × gov.taipei 四年施政成果資料庫</h2>
+          <p style="margin:4px 0 0;font-size:12px;color:var(--muted);">點擊下方任一政見卡片，舞台上的蔣萬安會立即用 3D 對話泡泡喊出該政見，並從畫面外飛入 3D 立體大字！</p>
+        </div>
+        <button class="pill-btn pink" id="closeArchiveBtn">✕ 關閉</button>
+      </div>
+
+      <div class="flyer-grid">
+        <div class="flyer-box">
+          <div style="font-weight:900;color:var(--neon-cyan);margin-bottom:6px;">📄 附圖一：都更心安・都更再升級（公辦都更 75%➔50%／大街廓 300%）</div>
+          <img src="assets/policy_renewal.jpg" alt="蔣萬安 都更再升級 公辦都更意願門檻75%降到50% 黃金十年政見圖">
+        </div>
+        <div class="flyer-box">
+          <div style="font-weight:900;color:var(--neon-gold);margin-bottom:6px;">📄 附圖二：產業心安・松山機場遷移打造 870 公頃台北 AI 園區</div>
+          <img src="assets/policy_aipark.jpg" alt="蔣萬安 松山機場遷移 870公頃 打造台北AI園區 110公頃台北中央公園政見圖">
+        </div>
+      </div>
+
+      <h3 style="margin:0 0 10px;color:var(--neon-cyan);font-size:14px;">⚡ 點擊觸發舞台 3D 飛字與群眾歡呼：</h3>
+      <div class="policy-list-grid" id="modalPolicyList"></div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data/policies.js"></script>
+  <script src="engine/colorfigures-afterlife.js"></script>
+  <script>
+    (function () {
+      const DATA = window.TAIPEI_2033_DATA;
+      const ENG = window.AfterlifeEngine;
+
+      // Scene State
+      const st = {
+        pal: 'afterlife',
+        time: 0,
+        xr: 0,
+        xrTarget: 0,
+        labelsOn: true,
+        hatOn: true,
+        mjMode: 'spin', // 'spin' | 'turbo' | 'lean' | 'moonwalk'
+        mjSpinAngle: 0,
+        mjSpinSpeed: 5.2,
+        mjLeanAngle: 0,
+        mjSlideY: 0,
+        totalSpins: 1128,
+        policyIdx: 0,
+        policyAge: 0,
+        cheerBaseIdx: 0,
+        cheerAge: 0,
+        lyricIdx: 0,
+        lyricAge: 0,
+        cryo: 0,
+        beatPulse: 0,
+        autoOrbit: false,
+        ttsOn: false
+      };
+      window.__st = st;
+
+      const art = document.getElementById('art');
+      const svg = document.getElementById('fig');
+      const toastEl = document.getElementById('toast');
+      const statMain = document.getElementById('statMain');
+      const statSub = document.getElementById('statSub');
+      const statSpins = document.getElementById('statSpins');
+      const lyricsTicker = document.getElementById('lyricsTicker');
+      const eqSpans = [...document.querySelectorAll('#eqMini span')];
+
+      let toastTimer = 0;
+      function flash(msg, ms = 2200) {
+        toastEl.textContent = msg;
+        toastEl.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toastEl.classList.remove('show'), ms);
+      }
+
+      // Optional TTS Voice Broadcast when Chiang Wan-an announces a policy
+      function speakPolicy(text) {
+        if (!st.ttsOn || !('speechSynthesis' in window)) return;
+        try {
+          window.speechSynthesis.cancel();
+          const u = new SpeechSynthesisUtterance(text);
+          u.lang = 'zh-TW';
+          u.rate = 1.15;
+          u.pitch = 1.05;
+          window.speechSynthesis.speak(u);
+        } catch (_) {}
+      }
+
+      function triggerPolicy(idx, announce = true) {
+        st.policyIdx = (idx + DATA.stagePolicies.length) % DATA.stagePolicies.length;
+        st.policyAge = 0;
+        st.cryo = 0.9;
+        const pol = DATA.stagePolicies[st.policyIdx];
+        statMain.textContent = pol.stats;
+        statSub.textContent = pol.category.split('・')[1] || pol.category;
+        if (announce) {
+          flash(`📢 3D 政見飛入：${pol.flyText3D}`);
+          speakPolicy(pol.speechBubble);
+        }
+      }
+
+      // ---- Audio System: Real《台北安可》MP3 + WebAudio Beat Analyzer + Cyber-Synth ----
+      const bgAudio = document.getElementById('bgAudio');
+      const audioToggleBtn = document.getElementById('audioToggleBtn');
+      const trackSelect = document.getElementById('trackSelect');
+      let audioCtx = null, analyser = null, dataArray = null, sourceNode = null;
+      let synthTimer = null, isPlayingAudio = false;
+
+      function initWebAudio() {
+        if (audioCtx) return;
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return;
+        audioCtx = new AC();
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 64;
+        dataArray = new Uint8Array(analyser.frequencyBinCount);
+        try {
+          sourceNode = audioCtx.createMediaElementSource(bgAudio);
+          sourceNode.connect(analyser);
+          analyser.connect(audioCtx.destination);
+        } catch (_) {}
+      }
+
+      function startSynthLoop() {
+        stopSynthLoop();
+        if (!audioCtx) initWebAudio();
+        if (!audioCtx) return;
+        let step = 0;
+        // Pop-Punk / Cyberpunk Afterlife chord progression in C#m / A / E / B
+        const bassNotes = [138.59, 138.59, 110.0, 110.0, 164.81, 164.81, 123.47, 123.47];
+        const leadNotes = [554.37, 659.25, 440.0, 554.37, 659.25, 739.99, 493.88, 659.25];
+        synthTimer = setInterval(() => {
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          const now = audioCtx.currentTime;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = step % 2 === 0 ? 'sawtooth' : 'square';
+          osc.frequency.setValueAtTime(
+            step % 2 === 0 ? bassNotes[(step >> 1) % bassNotes.length] : leadNotes[step % leadNotes.length],
+            now
+          );
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.19);
+          step++;
+        }, 190);
+      }
+
+      function stopSynthLoop() {
+        if (synthTimer) {
+          clearInterval(synthTimer);
+          synthTimer = null;
+        }
+      }
+
+      async function playSelectedTrack() {
+        initWebAudio();
+        if (audioCtx && audioCtx.state === 'suspended') await audioCtx.resume();
+        const mode = trackSelect.value;
+        if (mode === 'synth') {
+          bgAudio.pause();
+          startSynthLoop();
+          isPlayingAudio = true;
+          audioToggleBtn.textContent = '⏸️ 暫停《台北安可》';
+          audioToggleBtn.classList.add('active');
+          flash('🎹 正在播放：《台北安可 2033》來生夜店 Cyber-Synth 混音');
+          return;
+        }
+        stopSynthLoop();
+        const targetSrc = mode === 'rchord' ? 'assets/taipei_encore_rchord.mp3' : 'assets/taipei_encore_official.mp3';
+        if (!bgAudio.getAttribute('src').includes(targetSrc)) {
+          bgAudio.src = targetSrc;
+        }
+        try {
+          await bgAudio.play();
+          isPlayingAudio = true;
+          audioToggleBtn.textContent = '⏸️ 暫停《台北安可》';
+          audioToggleBtn.classList.add('active');
+          flash(mode === 'rchord' ? '🎸 正在無限輪播：《台北安可》謝和弦搖滾版' : '🎵 正在無限輪播：《台北安可》蔣萬安官方競選主題曲');
+        } catch (err) {
+          isPlayingAudio = false;
+          audioToggleBtn.textContent = '🔊 點擊播放《台北安可》';
+        }
+      }
+
+      function toggleAudio() {
+        if (isPlayingAudio) {
+          bgAudio.pause();
+          stopSynthLoop();
+          isPlayingAudio = false;
+          audioToggleBtn.textContent = '🔊 播放《台北安可》';
+          audioToggleBtn.classList.remove('active');
+        } else {
+          playSelectedTrack();
+        }
+      }
+
+      audioToggleBtn.onclick = toggleAudio;
+      trackSelect.onchange = () => {
+        if (isPlayingAudio) playSelectedTrack();
+        else playSelectedTrack();
+      };
+
+      // Try auto-play on load, and unlock on first user interaction anywhere if browser policy blocked it
+      playSelectedTrack();
+      const unlockOnce = () => {
+        if (!isPlayingAudio) playSelectedTrack();
+        window.removeEventListener('pointerdown', unlockOnce);
+        window.removeEventListener('keydown', unlockOnce);
+      };
+      window.addEventListener('pointerdown', unlockOnce, { once: true });
+      window.addEventListener('keydown', unlockOnce, { once: true });
+
+      // ---- Build Left Action Menus (Dance & Policies) ----
+      const danceModes = [
+        { id: 'spin', label: '🌪️ MJ 360° 連續旋轉舞步 (Toe-Spin)' },
+        { id: 'turbo', label: '⚡ 狂暴 1080° 氮氣加速旋轉 (Turbo)' },
+        { id: 'lean', label: '📐 45° 反重力前傾 (Smooth Criminal)' },
+        { id: 'moonwalk', label: '🌙 月球漫步滑步 (Moonwalk Glide)' },
+        { id: 'hat', label: '🎩 切換 MJ 白色紳士帽' }
+      ];
+      const chipsDance = document.getElementById('chipsDance');
+      function renderDanceChips() {
+        chipsDance.innerHTML = '';
+        danceModes.forEach(dm => {
+          const b = document.createElement('button');
+          b.className = 'chip' + (st.mjMode === dm.id ? ' current' : '');
+          b.textContent = dm.label;
+          b.onclick = e => {
+            e.stopPropagation();
+            closeAllMenus();
+            if (dm.id === 'hat') {
+              st.hatOn = !st.hatOn;
+              flash(st.hatOn ? '🎩 蔣萬安戴上 MJ 白色紳士帽！' : '✨ 露出招牌髮型！');
+              return;
+            }
+            st.mjMode = dm.id;
+            st.cryo = 0.85;
+            flash(`🕺 舞步切換：${dm.label}`);
+          };
+          chipsDance.appendChild(b);
+        });
+      }
+
+      const chipsPolicy = document.getElementById('chipsPolicy');
+      function renderPolicyChips() {
+        chipsPolicy.innerHTML = '';
+        DATA.stagePolicies.forEach((p, idx) => {
+          const b = document.createElement('button');
+          b.className = 'chip' + (st.policyIdx === idx ? ' current' : '');
+          b.textContent = `${idx + 1}. ${p.flyText3D}`;
+          b.onclick = e => {
+            e.stopPropagation();
+            closeAllMenus();
+            triggerPolicy(idx, true);
+          };
+          chipsPolicy.appendChild(b);
+        });
+      }
+
+      function closeAllMenus() {
+        document.querySelectorAll('.stepwrap.open').forEach(w => w.classList.remove('open'));
+      }
+      document.addEventListener('click', closeAllMenus);
+
+      document.getElementById('btnDance').onclick = e => {
+        e.stopPropagation();
+        const w = document.getElementById('wrapDance');
+        const wasOpen = w.classList.contains('open');
+        closeAllMenus();
+        if (!wasOpen) {
+          renderDanceChips();
+          w.classList.add('open');
+        }
+      };
+
+      document.getElementById('btnPolicy').onclick = e => {
+        e.stopPropagation();
+        const w = document.getElementById('wrapPolicy');
+        const wasOpen = w.classList.contains('open');
+        closeAllMenus();
+        if (!wasOpen) {
+          renderPolicyChips();
+          w.classList.add('open');
+        }
+      };
+
+      document.getElementById('btnNextPolicy').onclick = () => {
+        triggerPolicy(st.policyIdx + 1, true);
+      };
+
+      document.getElementById('btnCrowdWave').onclick = () => {
+        st.cheerBaseIdx = (st.cheerBaseIdx + 1) % DATA.crowdCheers.length;
+        st.cheerAge = 0;
+        st.beatPulse = 1.0;
+        const c = DATA.crowdCheers[st.cheerBaseIdx];
+        flash(`🙌 群眾尖叫感謝：${c.policy}！`);
+      };
+
+      document.getElementById('btnCryo').onclick = () => {
+        st.cryo = 1.0;
+        flash('🥛 生生喝鮮乳！低溫氮氣冷霧全開！');
+      };
+
+      // TTS Toggle
+      const ttsBtn = document.getElementById('ttsToggleBtn');
+      ttsBtn.onclick = () => {
+        st.ttsOn = !st.ttsOn;
+        ttsBtn.setAttribute('aria-pressed', st.ttsOn);
+        ttsBtn.textContent = st.ttsOn ? '🗣️ 政見語音: 開' : '🗣️ 政見語音: 關';
+        ttsBtn.classList.toggle('active', st.ttsOn);
+        if (st.ttsOn) speakPolicy(DATA.stagePolicies[st.policyIdx].speechBubble);
+      };
+
+      // See-through & Labels Toggles
+      const xrb = document.getElementById('xrb');
+      const lblb = document.getElementById('lblb');
+      xrb.onclick = () => {
+        st.xrTarget = st.xrTarget ? 0 : 1;
+        xrb.setAttribute('aria-pressed', !!st.xrTarget);
+        flash(st.xrTarget ? '🔍 開啟 Colorfigures 透視結構：檢視舞台地下 AI 與磁浮機械！' : '🏢 恢復來生夜店實體舞台外觀');
+      };
+      lblb.onclick = () => {
+        st.labelsOn = !st.labelsOn;
+        lblb.setAttribute('aria-pressed', st.labelsOn);
+      };
+
+      // Direct Click on 3D Scene Elements (data-act)
+      svg.addEventListener('pointerdown', e => {
+        if (e.button) return;
+        const a = e.target.closest('[data-act]');
+        if (!a) return;
+        const actName = a.dataset.act;
+        if (actName === 'wanan') {
+          st.mjMode = st.mjMode === 'turbo' ? 'lean' : st.mjMode === 'lean' ? 'moonwalk' : 'turbo';
+          st.cryo = 1.0;
+          triggerPolicy(st.policyIdx + 1, true);
+        } else if (actName === 'policy3d') {
+          triggerPolicy(st.policyIdx + 1, true);
+        } else if (actName === 'crowd') {
+          st.cheerBaseIdx = (st.cheerBaseIdx + 1) % DATA.crowdCheers.length;
+          st.beatPulse = 1.0;
+          flash('🙌 台下市民瘋狂尖叫：「萬安安可！台北安可！！」');
+        } else if (actName === 'speaker') {
+          st.beatPulse = 1.0;
+          flash('🔊 重低音音箱震動：《台北安可》音量全開！');
+        }
+      });
+
+      // ---- 3D Camera Orbit Drag & Preset Buttons ----
+      let drag = null;
+      svg.addEventListener('pointerdown', e => {
+        if (e.button || e.target.closest('[data-act]')) return;
+        st.autoOrbit = false;
+        syncCamBtns('');
+        const c = ENG.getCam();
+        drag = { x: e.clientX, y: e.clientY, yaw: c.yaw, pitch: c.pitch };
+        svg.classList.add('drag');
+        try { svg.setPointerCapture(e.pointerId); } catch (_) {}
+      });
+      svg.addEventListener('pointermove', e => {
+        if (!drag) return;
+        const k = 260 / svg.getBoundingClientRect().width;
+        ENG.setCam(drag.yaw + (e.clientX - drag.x) * 0.65 * k, drag.pitch + (e.clientY - drag.y) * 0.4 * k);
+      });
+      const endDrag = () => {
+        drag = null;
+        svg.classList.remove('drag');
+      };
+      svg.addEventListener('pointerup', endDrag);
+      svg.addEventListener('pointercancel', endDrag);
+
+      const camBtns = {
+        front: document.getElementById('camFront'),
+        iso: document.getElementById('camIso'),
+        pit: document.getElementById('camPit'),
+        spin: document.getElementById('camSpin')
+      };
+      function syncCamBtns(activeKey) {
+        Object.entries(camBtns).forEach(([k, b]) => b.setAttribute('aria-pressed', k === activeKey));
+      }
+      camBtns.front.onclick = () => {
+        st.autoOrbit = false;
+        ENG.setPersp(0.0019);
+        ENG.setCam(0, 15.5);
+        syncCamBtns('front');
+        flash('🎥 鏡頭：面對中央舞台 POV (背對尖叫群眾)');
+      };
+      camBtns.iso.onclick = () => {
+        st.autoOrbit = false;
+        ENG.setPersp(0);
+        ENG.setCam(42, 32);
+        syncCamBtns('iso');
+        flash('📐 鏡頭：Colorfigures 經典 45° 等軸透視視角');
+      };
+      camBtns.pit.onclick = () => {
+        st.autoOrbit = false;
+        ENG.setPersp(0.0023);
+        ENG.setCam(-10, 9.5);
+        syncCamBtns('pit');
+        flash('🔥 鏡頭：搖滾區第一排極限仰角');
+      };
+      camBtns.spin.onclick = () => {
+        st.autoOrbit = !st.autoOrbit;
+        syncCamBtns(st.autoOrbit ? 'spin' : '');
+      };
+
+      // ---- Hand-Drawn Wobble Slider & Palette Swatches ----
+      document.getElementById('wb').oninput = e => {
+        document.getElementById('wob').setAttribute('scale', (+e.target.value).toFixed(2));
+      };
+
+      const palsRow = document.getElementById('pals');
+      Object.entries(ENG.PALS).forEach(([key, p]) => {
+        const b = document.createElement('button');
+        b.className = 'sw';
+        b.title = p.name;
+        b.style.background = `linear-gradient(135deg, ${p.neonA.l} 0%, ${p.neonB.l} 55%, ${p.bg} 100%)`;
+        b.setAttribute('aria-pressed', key === st.pal);
+        b.onclick = () => {
+          st.pal = key;
+          document.body.classList.toggle('paper-mode', key === 'paper');
+          [...palsRow.children].forEach(c => c.setAttribute('aria-pressed', c === b));
+          flash(`🎨 切換風格配色：${p.name}`);
+        };
+        palsRow.appendChild(b);
+      });
+
+      // ---- Zoom Controls (Colorfigures .zchip) ----
+      let zoomS = 1, zoomTx = 0, zoomTy = 0;
+      const zwrap = document.getElementById('zwrap');
+      const zpBtn = document.getElementById('zoomReset');
+      function applyZoom() {
+        const w = svg.clientWidth, h = svg.clientHeight;
+        zoomS = Math.min(3.5, Math.max(1, zoomS));
+        if (zoomS <= 1.01) {
+          zoomS = 1;
+          zoomTx = 0;
+          zoomTy = 0;
+        } else {
+          zoomTx = Math.min(0, Math.max(w - w * zoomS, zoomTx));
+          zoomTy = Math.min(0, Math.max(h - h * zoomS, zoomTy));
+        }
+        svg.style.transform = zoomS === 1 ? '' : `translate(${zoomTx}px,${zoomTy}px) scale(${zoomS})`;
+        zpBtn.textContent = Math.round(zoomS * 100) + '%';
+      }
+      function zoomAt(factor, px, py) {
+        const s2 = Math.min(3.5, Math.max(1, zoomS * factor));
+        zoomTx = px - ((px - zoomTx) * s2) / zoomS;
+        zoomTy = py - ((py - zoomTy) * s2) / zoomS;
+        zoomS = s2;
+        applyZoom();
+      }
+      document.getElementById('zoomIn').onclick = () => zoomAt(1.35, svg.clientWidth / 2, svg.clientHeight / 2);
+      document.getElementById('zoomOut').onclick = () => zoomAt(1 / 1.35, svg.clientWidth / 2, svg.clientHeight / 2);
+      zpBtn.onclick = () => { zoomS = 1; applyZoom(); };
+      zwrap.addEventListener('wheel', e => {
+        if (e.ctrlKey || e.metaKey) {
+          e.preventDefault();
+          const r = zwrap.getBoundingClientRect();
+          zoomAt(Math.exp(-Math.max(-40, Math.min(40, e.deltaY)) * 0.006), e.clientX - r.left, e.clientY - r.top);
+        }
+      }, { passive: false });
+
+      // ---- Archive Modal Setup ----
+      const archiveModal = document.getElementById('archiveModal');
+      const modalPolicyList = document.getElementById('modalPolicyList');
+      DATA.stagePolicies.forEach((p, idx) => {
+        const card = document.createElement('div');
+        card.className = 'pol-card';
+        card.innerHTML = `<h4>${p.flyText3D}</h4><p>${p.speechBubble}</p>`;
+        card.onclick = () => {
+          archiveModal.classList.remove('open');
+          triggerPolicy(idx, true);
+        };
+        modalPolicyList.appendChild(card);
+      });
+      document.getElementById('openArchiveBtn').onclick = () => archiveModal.classList.add('open');
+      document.getElementById('closeArchiveBtn').onclick = () => archiveModal.classList.remove('open');
+      archiveModal.addEventListener('click', e => {
+        if (e.target === archiveModal) archiveModal.classList.remove('open');
+      });
+
+      // ---- URL Params Support for Verification & Direct States ----
+      const q = new URLSearchParams(location.search);
+      if (q.has('yaw') || q.has('pitch')) {
+        ENG.setCam(+(q.get('yaw') || 0), +(q.get('pitch') || 15.5));
+      }
+      if (q.get('xr') === '1') {
+        st.xr = st.xrTarget = 1;
+        xrb.setAttribute('aria-pressed', 'true');
+      }
+      if (q.get('pal') && ENG.PALS[q.get('pal')]) {
+        st.pal = q.get('pal');
+        document.body.classList.toggle('paper-mode', st.pal === 'paper');
+      }
+
+      // ---- Main 60FPS Animation Driver ----
+      let lastNow = performance.now();
+      let frameCount = 0;
+      const maxShotFrames = q.has('shot') ? (+q.get('shot') || 20) : Infinity;
+      function tick(now) {
+        frameCount++;
+        const dt = Math.min(0.05, Math.max(0.016, (now - lastNow) / 1000));
+        lastNow = now;
+        st.time += dt;
+
+        // Smooth See-through transition
+        if (Math.abs(st.xrTarget - st.xr) > 0.005) {
+          st.xr += Math.sign(st.xrTarget - st.xr) * dt * 1.6;
+          st.xr = Math.max(0, Math.min(1, st.xr));
+        }
+
+        // Beat detection from WebAudio Analyser (or procedural 132 BPM Pop-Punk beat of《台北安可》)
+        let audioBeat = 0;
+        if (analyser && isPlayingAudio && trackSelect.value !== 'synth') {
+          analyser.getByteFrequencyData(dataArray);
+          let sum = 0;
+          for (let i = 0; i < 8; i++) sum += dataArray[i];
+          audioBeat = Math.min(1, sum / (8 * 215));
+        } else {
+          // 132 BPM procedural beat pulse
+          const beatPhase = (st.time * (132 / 60)) % 1;
+          audioBeat = Math.pow(Math.max(0, 1 - beatPhase * 2.5), 2);
+        }
+        st.beatPulse = Math.max(audioBeat, st.beatPulse * Math.pow(0.15, dt));
+
+        // Update mini equalizer bars in top lyrics ticker
+        eqSpans.forEach((sp, i) => {
+          const h = 4 + 12 * Math.abs(Math.sin(st.time * 8 + i * 0.9)) * (0.45 + 0.55 * st.beatPulse);
+          sp.style.height = h.toFixed(1) + 'px';
+        });
+
+        // Decay cryo jet
+        if (st.cryo > 0) st.cryo = Math.max(0, st.cryo - dt * 0.55);
+
+        // Chiang Wan-an Michael Jackson Dance Choreography
+        if (st.mjMode === 'spin') {
+          // Classic MJ rhythmic spin burst + short pose freeze every 4.5s
+          const cycle = st.time % 4.5;
+          st.mjSpinSpeed = cycle < 3.4 ? 6.8 : 0.6;
+          st.mjSpinAngle += st.mjSpinSpeed * dt;
+          st.mjLeanAngle *= Math.pow(0.05, dt);
+          st.mjSlideY *= Math.pow(0.1, dt);
+        } else if (st.mjMode === 'turbo') {
+          st.mjSpinSpeed = 14.5;
+          st.mjSpinAngle += st.mjSpinSpeed * dt;
+          st.mjLeanAngle *= Math.pow(0.05, dt);
+        } else if (st.mjMode === 'lean') {
+          // 45-degree Smooth Criminal Anti-Gravity Lean + slow spin
+          st.mjSpinSpeed = 2.2;
+          st.mjSpinAngle += st.mjSpinSpeed * dt;
+          const targetLean = 0.52 * Math.sin(st.time * 2.4);
+          st.mjLeanAngle += (targetLean - st.mjLeanAngle) * dt * 6;
+        } else if (st.mjMode === 'moonwalk') {
+          st.mjSpinSpeed = 3.2;
+          st.mjSpinAngle += st.mjSpinSpeed * dt;
+          st.mjSlideY = Math.sin(st.time * 2.2) * 24;
+          st.mjLeanAngle *= Math.pow(0.05, dt);
+        }
+
+        // Update spin counter
+        const newSpins = 1128 + Math.floor(st.mjSpinAngle / (2 * Math.PI));
+        if (statSpins.textContent !== `${newSpins.toLocaleString()} 圈`) {
+          statSpins.textContent = `${newSpins.toLocaleString()} 圈`;
+        }
+
+        // Auto-cycle 3D Flying Policy Slogans every 6.2 seconds
+        st.policyAge += dt;
+        if (st.policyAge > 6.2) {
+          triggerPolicy(st.policyIdx + 1, false);
+        }
+
+        // Auto-cycle Crowd Gratitude Speech Bubbles every 4.2 seconds
+        st.cheerAge += dt;
+        if (st.cheerAge > 4.2) {
+          st.cheerAge = 0;
+          st.cheerBaseIdx = (st.cheerBaseIdx + 1) % DATA.crowdCheers.length;
+        }
+
+        // Auto-cycle《台北安可》Lyrics Ticker every 4.8 seconds
+        st.lyricAge += dt;
+        if (st.lyricAge > 4.8) {
+          st.lyricAge = 0;
+          st.lyricIdx = (st.lyricIdx + 1) % DATA.lyrics.length;
+          lyricsTicker.textContent = DATA.lyrics[st.lyricIdx];
+        }
+
+        // Optional 360 camera turntable
+        if (st.autoOrbit && !drag) {
+          const c = ENG.getCam();
+          ENG.setCam(c.yaw + dt * 22, c.pitch);
+        }
+
+        // Render 3D Colorfigures × Afterlife Scene
+        art.innerHTML = ENG.renderScene(st);
+        if (frameCount < maxShotFrames) requestAnimationFrame(tick);
+      }
+
+      requestAnimationFrame(tick);
+    })();
+  </script>
+</body>
+</html>
