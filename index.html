@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
   <title>2033 台北來生夜店 AFTERLIFE // TAIPEI ENCORE · Colorfigures 3D</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,17 +26,13 @@
     body {
       background-color: var(--club-bg);
       background-image:
-        radial-gradient(circle at 50% 24%, rgba(255, 42, 133, 0.16), transparent 52%),
-        radial-gradient(circle at 50% 62%, rgba(0, 240, 255, 0.12), transparent 60%),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .6  .08 0 0 0 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>");
+        radial-gradient(circle at 50% 22%, rgba(255, 42, 133, 0.16), transparent 55%),
+        radial-gradient(circle at 50% 65%, rgba(0, 240, 255, 0.12), transparent 60%);
       color: var(--text-main);
-      font: 13px/1.45 var(--mono);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 14px 16px 28px;
+      font: 13px/1.4 var(--mono);
+      display: block;
+      padding: 8px 10px 20px;
       overflow-x: hidden;
-      transition: background-color 0.35s ease;
     }
     body.paper-mode {
       --text-main: #231e16;
@@ -44,117 +40,93 @@
       --panel: #f8f6f0;
     }
 
-    /* Top Header Bar */
-    header.top-bar {
+    /* Main Stage Frame (White/Neon Bordered Container with Everything Inside!) */
+    .stage {
+      position: relative;
       width: 100%;
-      max-width: 1080px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      padding-bottom: 10px;
-      border-bottom: 1.5px solid rgba(0, 240, 255, 0.28);
+      max-width: 1120px;
+      min-width: 0;
+      margin: 0 auto;
+      border: 2.5px solid var(--paper);
+      border-radius: 18px;
+      box-shadow: 0 0 0 2px var(--ink), 6px 6px 0 var(--ink), 0 0 32px rgba(0, 240, 255, 0.18);
+      background: var(--club-bg);
+      overflow: hidden;
+      display: block;
     }
-    .brand-title {
+    body.paper-mode .stage {
+      background: #f8f6f0;
+      border-color: #231e16;
+      box-shadow: 6px 6px 0 #231e16;
+    }
+
+    /* Compact Top HUD Bar Inside Stage Frame */
+    .stage-top-hud {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 10px;
+      padding: 8px 14px;
+      background: rgba(14, 15, 28, 0.92);
+      border-bottom: 1.5px solid rgba(0, 240, 255, 0.28);
       flex-wrap: wrap;
+      z-index: 6;
+    }
+    body.paper-mode .stage-top-hud {
+      background: #ebe6da;
+      border-bottom: 1.5px solid #231e16;
+    }
+    .brand-compact {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
     }
     .brand-badge {
       background: var(--neon-pink);
       color: #fff;
       font-weight: 900;
-      font-size: 11px;
-      padding: 3px 9px;
+      font-size: 10.5px;
+      padding: 2px 8px;
       border-radius: 999px;
       border: 1.5px solid var(--ink);
       box-shadow: 2px 2px 0 var(--ink);
-      letter-spacing: 0.08em;
-    }
-    header h1 {
-      font-size: 15px;
-      font-weight: 900;
-      margin: 0;
-      letter-spacing: 0.03em;
-    }
-    header .sub-loc {
-      color: var(--neon-cyan);
-      font-size: 12px;
-      font-weight: 700;
-    }
-    body.paper-mode header .sub-loc { color: #cf5038; }
-
-    /* Audio & Archive Top Controls */
-    .top-tools {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .pill-btn {
-      font: inherit;
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--ink);
-      background: var(--paper);
-      border: 2px solid var(--ink);
-      border-radius: 999px;
-      padding: 5px 13px;
-      cursor: pointer;
-      box-shadow: 3px 3px 0 var(--ink);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: transform 0.1s, background 0.15s;
       white-space: nowrap;
+      flex-shrink: 0;
     }
-    .pill-btn:hover {
-      background: var(--neon-gold);
-      transform: translate(-1px, -1px);
-    }
-    .pill-btn.active {
-      background: var(--neon-cyan);
-      color: var(--ink);
-    }
-    .pill-btn.pink {
-      background: var(--neon-pink);
-      color: #fff;
-    }
-    select.track-select {
-      font: inherit;
-      font-size: 11.5px;
-      font-weight: 800;
-      color: var(--ink);
-      background: #fff4d6;
-      border: 2px solid var(--ink);
-      border-radius: 999px;
-      padding: 5px 12px;
-      box-shadow: 3px 3px 0 var(--ink);
-      cursor: pointer;
+    .brand-title-text {
+      font-size: 13.5px;
+      font-weight: 900;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+      flex: 1;
     }
 
-    /* Live Lyrics & Beat Bar */
-    .lyrics-bar {
-      width: 100%;
-      max-width: 1080px;
-      margin: 8px 0 6px;
-      padding: 6px 14px;
-      background: rgba(18, 14, 26, 0.85);
-      border: 1.5px solid var(--neon-cyan);
-      border-radius: 10px;
-      box-shadow: 3px 3px 0 var(--ink);
+    /* Live Lyrics Ticker in Top HUD */
+    .lyrics-inline {
+      flex: 1 1 220px;
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(9, 7, 16, 0.75);
+      border: 1px solid rgba(0, 240, 255, 0.45);
+      border-radius: 999px;
+      padding: 3px 12px;
     }
     .lyrics-text {
+      flex: 1;
+      min-width: 0;
       font-weight: 800;
-      font-size: 12.5px;
+      font-size: 11.5px;
       color: var(--neon-gold);
-      letter-spacing: 0.04em;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -162,194 +134,54 @@
     .eq-mini {
       display: flex;
       align-items: flex-end;
-      gap: 3px;
-      height: 16px;
+      gap: 2px;
+      height: 13px;
       flex: none;
     }
     .eq-mini span {
-      width: 4px;
-      height: 6px;
+      width: 3px;
+      height: 5px;
       background: var(--neon-pink);
-      border-radius: 2px;
-      transition: height 0.08s ease;
+      border-radius: 1.5px;
     }
 
-    /* Main Stage Container (Colorfigures style) */
-    .stage {
-      position: relative;
-      width: 100%;
-      max-width: 1080px;
-      border: 2.5px solid var(--ink);
-      border-radius: 18px;
-      box-shadow: 6px 6px 0 var(--ink), 0 0 28px rgba(0, 240, 255, 0.16);
-      background: rgba(13, 14, 26, 0.55);
-      overflow: hidden;
-    }
-    body.paper-mode .stage {
-      background: #f8f6f0;
-      box-shadow: 6px 6px 0 #231e16;
-    }
-
-    /* Left Interactive Action Buttons (Colorfigures .actions) */
-    .actions {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 8px;
-      z-index: 5;
-    }
-    .actions .cap {
-      color: var(--neon-cyan);
-      font-size: 10.5px;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      background: rgba(18, 14, 26, 0.82);
-      padding: 2px 7px;
-      border-radius: 4px;
-    }
-    .stepwrap {
-      position: relative;
+    /* Top-Right Compact Stats & See-through Switches */
+    .hud-right {
       display: flex;
       align-items: center;
-    }
-    .act-btn {
-      font: inherit;
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--ink);
-      background: var(--paper);
-      border: 2px solid var(--ink);
-      border-radius: 999px;
-      padding: 5px 13px;
-      cursor: pointer;
-      box-shadow: 3px 3px 0 var(--ink);
-      white-space: nowrap;
-      transition: transform 0.1s, background 0.15s;
-    }
-    .act-btn:hover {
-      background: var(--neon-gold);
-      transform: translate(-1px, -1px);
-    }
-    .chips {
-      display: none;
+      gap: 6px;
       flex-wrap: wrap;
-      gap: 6px;
-      background: var(--paper);
-      border: 2px solid var(--ink);
-      border-radius: 12px;
-      box-shadow: 4px 4px 0 var(--ink);
-      padding: 9px;
-      width: max-content;
-      max-width: min(360px, 78vw);
-      position: absolute;
-      left: calc(100% + 8px);
-      top: -2px;
-      z-index: 10;
     }
-    .stepwrap.open .chips { display: flex; }
-    .chip {
-      font: inherit;
-      font-size: 11.5px;
-      font-weight: 800;
-      color: var(--ink);
-      background: #fff9e6;
-      border: 1.5px solid var(--ink);
+    .stat-pill {
+      background: rgba(18, 14, 26, 0.9);
+      border: 1.5px solid rgba(255, 208, 38, 0.55);
       border-radius: 8px;
-      padding: 4px 9px;
-      cursor: pointer;
-      box-shadow: 2px 2px 0 var(--ink);
+      padding: 2px 8px;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 5px;
+      white-space: nowrap;
     }
-    .chip:hover {
-      background: var(--neon-cyan);
-      transform: translate(-1px, -1px);
-    }
-    .chip.current {
-      background: var(--ink);
-      color: var(--paper);
-    }
-
-    /* Top-Right See-through / Labels + Stats (Colorfigures .vset + .stats) */
-    .right-hud {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
-      z-index: 5;
-      pointer-events: none;
-    }
-    .vrow {
-      display: flex;
-      gap: 6px;
-      pointer-events: auto;
-    }
-    .vrow .act-btn[aria-pressed="true"] {
-      background: var(--neon-cyan);
-      color: var(--ink);
-    }
-    .stats {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 6px;
-      text-align: right;
-      background: rgba(18, 14, 26, 0.78);
-      border: 1.5px solid rgba(255, 208, 38, 0.45);
-      padding: 7px 11px;
-      border-radius: 12px;
-      box-shadow: 3px 3px 0 var(--ink);
-    }
-    .stat .k {
-      font-size: 10px;
+    .stat-pill .k {
+      font-size: 9.5px;
       font-weight: 800;
-      letter-spacing: 0.08em;
       color: var(--neon-cyan);
     }
-    .stat .v {
-      font-size: 19px;
+    .stat-pill .v {
+      font-size: 13px;
       font-weight: 900;
-      line-height: 1.1;
       color: var(--neon-gold);
       font-variant-numeric: tabular-nums;
     }
 
-    /* Toast Notice on Stage */
-    .toast {
-      position: absolute;
-      left: 50%;
-      top: 14px;
-      transform: translate(-50%, -6px);
-      z-index: 8;
-      background: #fff1bf;
-      color: #120e1a;
-      border: 2px solid #120e1a;
-      border-radius: 999px;
-      padding: 6px 16px;
-      font-weight: 900;
-      font-size: 12px;
-      box-shadow: 3px 3px 0 #120e1a;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s, transform 0.2s;
-      white-space: nowrap;
-    }
-    .toast.show {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
-
-    /* SVG 3D Viewport */
+    /* 3D Viewport Wrapper */
     .zwrap {
       position: relative;
       width: 100%;
       overflow: hidden;
+      background: var(--club-bg);
     }
+    body.paper-mode .zwrap { background: #f2efe7; }
     #fig {
       width: 100%;
       height: auto;
@@ -361,119 +193,230 @@
     }
     #fig.drag { cursor: grabbing; }
 
-    /* Zoom Chip (Colorfigures bottom-right) */
+    /* Center Toast on Stage */
+    .toast {
+      position: absolute;
+      left: 50%;
+      top: 12px;
+      transform: translate(-50%, -6px);
+      z-index: 12;
+      background: #fff1bf;
+      color: #120e1a;
+      border: 2px solid #120e1a;
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-weight: 900;
+      font-size: 11.5px;
+      box-shadow: 3px 3px 0 #120e1a;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s, transform 0.18s;
+      max-width: 90%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* Zoom Chip (Bottom-Right of 3D Canvas) */
     .zchip {
       position: absolute;
-      right: 12px;
-      bottom: 12px;
+      right: 10px;
+      bottom: 10px;
       display: flex;
       align-items: center;
       gap: 2px;
-      font: 800 11.5px var(--mono);
+      font: 800 11px var(--mono);
       background: var(--paper);
       color: var(--ink);
       border: 2px solid var(--ink);
       border-radius: 999px;
       padding: 2px 4px;
-      box-shadow: 3px 3px 0 var(--ink);
+      box-shadow: 2px 2px 0 var(--ink);
       z-index: 5;
     }
     .zchip button {
       all: unset;
       cursor: pointer;
-      min-width: 24px;
-      height: 22px;
-      line-height: 22px;
+      min-width: 22px;
+      height: 20px;
+      line-height: 20px;
       text-align: center;
       border-radius: 999px;
       font-weight: 900;
     }
     .zchip button:hover { background: var(--neon-gold); }
-    .zchip .zp { min-width: 46px; }
+    .zchip .zp { min-width: 42px; }
 
-    /* Bottom Controls Grid (Colorfigures .controls) */
-    .controls {
-      width: 100%;
-      max-width: 1080px;
-      margin-top: 12px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px 22px;
-      background: rgba(21, 23, 43, 0.85);
-      border: 2px solid var(--ink);
-      border-radius: 14px;
-      padding: 12px 16px;
-      box-shadow: 4px 4px 0 var(--ink);
-    }
-    body.paper-mode .controls {
-      background: #ebe6da;
-    }
-    .ctl {
+    /* Unified Control Dock Inside Stage Bottom */
+    .stage-dock {
+      background: rgba(19, 21, 38, 0.96);
+      border-top: 2px solid var(--ink);
+      padding: 10px 14px 12px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 10px;
+      z-index: 8;
     }
-    .ctl label {
-      color: var(--neon-cyan);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    body.paper-mode .stage-dock {
+      background: #ebe6da;
     }
-    body.paper-mode .ctl label { color: #4a4339; }
-    input[type="range"] {
-      width: 100%;
-      accent-color: var(--neon-pink);
-      cursor: pointer;
-    }
-    .row {
+    .dock-row {
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .dock-group {
+      display: flex;
+      align-items: center;
       gap: 6px;
       flex-wrap: wrap;
-      align-items: center;
     }
-    .ctrl-btn {
+
+    /* Buttons & Upward Popover Chips */
+    .act-btn {
       font: inherit;
       font-size: 11.5px;
       font-weight: 800;
       color: var(--ink);
       background: var(--paper);
-      border: 1.5px solid var(--ink);
+      border: 2px solid var(--ink);
       border-radius: 999px;
-      padding: 4px 11px;
+      padding: 5px 12px;
       cursor: pointer;
-      box-shadow: 2px 2px 0 var(--ink);
+      box-shadow: 2.5px 2.5px 0 var(--ink);
+      white-space: nowrap;
+      transition: transform 0.1s, background 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
     }
-    .ctrl-btn:hover { background: var(--neon-gold); }
-    .ctrl-btn[aria-pressed="true"] {
+    .act-btn:hover {
+      background: var(--neon-gold);
+      transform: translate(-1px, -1px);
+    }
+    .act-btn[aria-pressed="true"], .act-btn.active {
       background: var(--neon-cyan);
       color: var(--ink);
     }
+    .act-btn.pink {
+      background: var(--neon-pink);
+      color: #fff;
+    }
+    select.track-select {
+      font: inherit;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--ink);
+      background: #fff4d6;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      padding: 4px 10px;
+      box-shadow: 2.5px 2.5px 0 var(--ink);
+      cursor: pointer;
+      max-width: 215px;
+    }
+
+    .stepwrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    /* Popover opens UPWARD above the bottom dock so it never overflows off-screen */
+    .chips {
+      display: none;
+      flex-wrap: wrap;
+      gap: 6px;
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      box-shadow: 4px 4px 0 var(--ink);
+      padding: 9px;
+      width: max-content;
+      max-width: min(350px, 88vw);
+      position: absolute;
+      left: 0;
+      bottom: calc(100% + 8px);
+      z-index: 25;
+    }
+    .stepwrap.open .chips { display: flex; }
+    .chip {
+      font: inherit;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--ink);
+      background: #fff9e6;
+      border: 1.5px solid var(--ink);
+      border-radius: 8px;
+      padding: 4px 8px;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+    .chip:hover { background: var(--neon-cyan); }
+    .chip.current { background: var(--ink); color: var(--paper); }
+
+    /* Secondary Controls (Camera, Palette, Wobble) */
+    .sub-dock {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    body.paper-mode .sub-dock {
+      border-top-color: rgba(35, 30, 22, 0.18);
+    }
+    .ctl-inline {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .ctl-inline label {
+      color: var(--neon-cyan);
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    body.paper-mode .ctl-inline label { color: #4a4339; }
+    input[type="range"] {
+      width: 95px;
+      accent-color: var(--neon-pink);
+      cursor: pointer;
+    }
     .sw {
-      width: 28px;
-      height: 28px;
+      width: 22px;
+      height: 22px;
       padding: 0;
       border-radius: 50%;
       border: 2px solid var(--ink);
       cursor: pointer;
-      box-shadow: 2px 2px 0 var(--ink);
+      box-shadow: 1.5px 1.5px 0 var(--ink);
     }
     .sw[aria-pressed="true"] {
-      outline: 3px solid var(--neon-gold);
-      outline-offset: 2px;
+      outline: 2.5px solid var(--neon-gold);
+      outline-offset: 1.5px;
     }
 
     /* Policy & Campaign Flyers Modal */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(6, 5, 12, 0.82);
+      background: rgba(6, 5, 12, 0.84);
       backdrop-filter: blur(6px);
       z-index: 50;
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 14px;
     }
     .modal-backdrop.open { display: flex; }
     .modal-card {
@@ -484,29 +427,30 @@
       box-shadow: 8px 8px 0 #000;
       max-width: 980px;
       width: 100%;
-      max-height: 88vh;
+      max-height: 90vh;
       overflow-y: auto;
-      padding: 20px 24px;
+      padding: 18px 20px;
     }
     .modal-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
       border-bottom: 1.5px solid rgba(0, 240, 255, 0.3);
-      padding-bottom: 12px;
-      margin-bottom: 16px;
+      padding-bottom: 10px;
+      margin-bottom: 14px;
     }
     .flyer-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 16px;
-      margin-bottom: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
     }
     .flyer-box {
       background: #0d0e1a;
       border: 2px solid var(--neon-gold);
       border-radius: 12px;
-      padding: 10px;
+      padding: 8px;
       text-align: center;
     }
     .flyer-box img {
@@ -517,7 +461,7 @@
     }
     .policy-list-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 10px;
     }
     .pol-card {
@@ -533,123 +477,67 @@
       border-color: var(--neon-gold);
       background: #25294a;
     }
-    .pol-card h4 {
-      margin: 0 0 4px;
-      color: var(--neon-gold);
-      font-size: 13px;
-    }
-    .pol-card p {
-      margin: 0;
-      font-size: 11.5px;
-      color: #d8ddf0;
-    }
+    .pol-card h4 { margin: 0 0 4px; color: var(--neon-gold); font-size: 13px; }
+    .pol-card p { margin: 0; font-size: 11.5px; color: #d8ddf0; }
 
+    /* Mobile Optimization: Keep Stage at Very Top with Zero Blank Space! */
     @media (max-width: 720px) {
-      .actions { position: static; flex-direction: row; flex-wrap: wrap; padding: 8px; }
-      .right-hud { position: static; flex-direction: row; justify-content: space-between; width: 100%; padding: 0 8px 8px; }
-      .chips { left: 0; top: calc(100% + 6px); }
+      body { padding: 4px 4px 14px; }
+      .stage { border-radius: 14px; border-width: 2px; }
+      .stage-top-hud { padding: 6px 10px; gap: 6px; }
+      .brand-title-text { font-size: 12px; }
+      .lyrics-inline { order: 3; width: 100%; flex: 1 1 100%; justify-content: flex-start; }
+      .stat-pill.hide-mobile { display: none; }
+      .stage-dock { padding: 8px 10px; gap: 8px; }
+      .act-btn { font-size: 11px; padding: 4px 9px; }
+      select.track-select { max-width: 165px; font-size: 10.5px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Bar -->
-  <header class="top-bar">
-    <div class="brand-title">
-      <span class="brand-badge">AFTERLIFE 2033 來生夜店</span>
-      <h1>Fig. 2033 — 台北 AI 園區「來生」中央舞台 (蔣萬安 × 台北安可)</h1>
-      <span class="sub-loc">📍 松山機場遷移舊址 870 公頃・Colorfigures 3D Hand-Inked Render</span>
-    </div>
-    <div class="top-tools">
-      <button class="pill-btn pink" id="audioToggleBtn">🔊 播放《台北安可》</button>
-      <select class="track-select" id="trackSelect" aria-label="選擇台北安可音軌">
-        <option value="official">🎵 台北安可 (2026 蔣萬安官方競選版)</option>
-        <option value="rchord">🎸 台北安可 (謝和弦 R-chord 搖滾版)</option>
-        <option value="synth">🎹 台北安可 2033 (Afterlife Cyber-Synth)</option>
-      </select>
-      <button class="pill-btn" id="ttsToggleBtn" aria-pressed="false">🗣️ 政見語音: 關</button>
-      <button class="pill-btn" id="openArchiveBtn">📋 政見與四年政績圖庫</button>
-    </div>
-  </header>
-
-  <!-- Live《台北安可》Lyrics Ticker & Beat Equalizer -->
-  <div class="lyrics-bar">
-    <div class="lyrics-text" id="lyricsTicker">🎵 《台北安可 TAIPEI ENCORE》— 台北安可！我們有大巨蛋、輝達、還有生生鮮奶喔！遷移松山機場讓 GD 跟黃仁勳坐機捷來台北只要 36 分鐘！</div>
-    <div class="eq-mini" id="eqMini">
-      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-    </div>
-  </div>
-
-  <!-- Main 3D Stage (Colorfigures Structure) -->
+  <!-- Unified White-Bordered Stage Card (3D Stage Immediately at Top, All Controls Inside!) -->
   <div class="stage">
-    <!-- Left Interactive Buttons -->
-    <div class="actions" id="btns">
-      <div class="cap">互動舞台控制 · 點擊角色或按鈕</div>
 
-      <!-- 1. MJ Dance Mode Picker -->
-      <div class="stepwrap" id="wrapDance">
-        <button class="act-btn" id="btnDance">🕺 麥可舞步切換 ▾</button>
-        <div class="chips" id="chipsDance"></div>
+    <!-- 1. Compact Top HUD Inside Stage Frame -->
+    <div class="stage-top-hud">
+      <div class="brand-compact">
+        <span class="brand-badge">AFTERLIFE 2033</span>
+        <span class="brand-title-text">台北 AI 園區「來生」夜店 · 蔣萬安 × 台北安可</span>
       </div>
 
-      <!-- 2. Launch 3D Policy Picker -->
-      <div class="stepwrap" id="wrapPolicy">
-        <button class="act-btn" id="btnPolicy">📢 發射 3D 政見大字 ▾</button>
-        <div class="chips" id="chipsPolicy"></div>
-      </div>
-
-      <!-- 3. Next Policy Immediate Trigger -->
-      <div class="stepwrap">
-        <button class="act-btn" id="btnNextPolicy">🚀 飛入下一條 3D 政見</button>
-      </div>
-
-      <!-- 4. Crowd Cheer Wave -->
-      <div class="stepwrap">
-        <button class="act-btn" id="btnCrowdWave">🙌 萬頭鑽動尖叫＋換政績感謝</button>
-      </div>
-
-      <!-- 5. Cryo Fresh Milk Jet -->
-      <div class="stepwrap">
-        <button class="act-btn" id="btnCryo">🥛 噴射生生鮮奶冷霧</button>
-      </div>
-    </div>
-
-    <!-- Right See-through / Labels + Stats -->
-    <div class="right-hud">
-      <div class="vrow">
-        <button class="act-btn" id="xrb" aria-pressed="false">🔍 See-through 透視結構</button>
-        <button class="act-btn" id="lblb" aria-pressed="true">🏷️ Labels 工程標籤</button>
-      </div>
-      <div class="stats">
-        <div class="stat">
-          <div class="k">松機遷移 AI 園區</div>
-          <div class="v" id="statMain">870 公頃</div>
+      <div class="lyrics-inline">
+        <div class="eq-mini" id="eqMini">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
         </div>
-        <div class="stat">
-          <div class="k">公辦都更門檻 / 容積</div>
-          <div class="v" id="statSub">75%➔50% (300%)</div>
+        <div class="lyrics-text" id="lyricsTicker">🎵 《台北安可》— 台北安可！我們有大巨蛋、輝達、還有生生鮮奶喔！遷移松山機場讓 GD 跟黃仁勳坐機捷來台北只要 36 分鐘！</div>
+      </div>
+
+      <div class="hud-right">
+        <div class="stat-pill">
+          <span class="k">AI園區</span>
+          <span class="v" id="statMain">870公頃</span>
         </div>
-        <div class="stat">
-          <div class="k">萬安 MJ 旋轉圈數</div>
-          <div class="v" id="statSpins">1,128 圈</div>
+        <div class="stat-pill hide-mobile">
+          <span class="k">都更</span>
+          <span class="v" id="statSub">75%➔50%</span>
+        </div>
+        <div class="stat-pill">
+          <span class="k">MJ旋轉</span>
+          <span class="v" id="statSpins">1,128圈</span>
         </div>
       </div>
     </div>
 
-    <!-- Center Toast -->
-    <div class="toast" id="toast" role="status"></div>
-
-    <!-- 3D SVG Canvas with Colorfigures #hand Wobble & Grain Filter -->
+    <!-- 2. 3D SVG Canvas (Zoomed-In Central Stage, Right at the Top!) -->
     <div class="zwrap" id="zwrap">
-      <svg id="fig" viewBox="0 0 960 640" role="img" aria-label="2033 台北來生夜店 蔣萬安中央舞台 3D 場景">
+      <div class="toast" id="toast" role="status"></div>
+      <svg id="fig" viewBox="0 0 960 545" role="img" aria-label="2033 台北來生夜店 蔣萬安中央舞台 3D 場景">
         <defs id="fdefs">
-          <filter id="hand" x="-4%" y="-4%" width="108%" height="108%" color-interpolation-filters="sRGB">
-            <feTurbulence type="fractalNoise" baseFrequency="0.028" numOctaves="2" seed="4" result="warp"/>
-            <feDisplacementMap id="wob" in="SourceGraphic" in2="warp" scale="2.2" xChannelSelector="R" yChannelSelector="G" result="wob"/>
-            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="2" seed="11" result="n1"/>
-            <feColorMatrix in="n1" type="matrix" values=".2 0 0 0 .88  .2 0 0 0 .88  .2 0 0 0 .88  0 0 0 0 1" result="grain"/>
-            <feBlend in="wob" in2="grain" mode="multiply" result="g1"/>
-            <feComposite in="g1" in2="wob" operator="in"/>
+          <!-- Lightweight Pre-Baked Colorfigures Hand-Drawn Wobble Filter -->
+          <filter id="hand" x="-2%" y="-2%" width="104%" height="104%" color-interpolation-filters="sRGB">
+            <feTurbulence id="turb" type="fractalNoise" baseFrequency="0.03" numOctaves="1" seed="4" result="warp"/>
+            <feDisplacementMap id="wob" in="SourceGraphic" in2="warp" scale="1.8" xChannelSelector="R" yChannelSelector="G"/>
           </filter>
         </defs>
         <g id="art" filter="url(#hand)"></g>
@@ -660,27 +548,61 @@
         <button id="zoomIn" aria-label="放大">+</button>
       </div>
     </div>
-  </div>
 
-  <!-- Bottom Colorfigures Controls Bar -->
-  <div class="controls">
-    <div class="ctl">
-      <label for="wb">Hand-drawn wobble (Colorfigures 手繪線條抖動)</label>
-      <input id="wb" type="range" min="0" max="6.5" step="0.1" value="2.2">
-    </div>
-    <div class="ctl">
-      <label>Palette (來生夜店配色 / 經典暖紙)</label>
-      <div class="row" id="pals"></div>
-    </div>
-    <div class="ctl">
-      <label>3D 鏡頭視角 (拖曳畫面可 360° 自由旋轉)</label>
-      <div class="row">
-        <button class="ctrl-btn" id="camFront" aria-pressed="true">面對中央舞台 POV</button>
-        <button class="ctrl-btn" id="camIso" aria-pressed="false">Colorfigures 45° 等軸</button>
-        <button class="ctrl-btn" id="camPit" aria-pressed="false">搖滾區仰角</button>
-        <button class="ctrl-btn" id="camSpin" aria-pressed="false">360° 環繞</button>
+    <!-- 3. Bottom Interactive Control Dock Inside Stage Frame -->
+    <div class="stage-dock">
+      <!-- Primary Action Row: Music + Stage Actions + Archive -->
+      <div class="dock-row">
+        <div class="dock-group">
+          <button class="act-btn pink" id="audioToggleBtn">🔊 播放《台北安可》</button>
+          <select class="track-select" id="trackSelect" aria-label="選擇台北安可音軌">
+            <option value="official">🎵 台北安可 (2026 蔣萬安官方版)</option>
+            <option value="rchord">🎸 台北安可 (謝和弦搖滾版)</option>
+            <option value="synth">🎹 台北安可 2033 (Cyber-Synth)</option>
+          </select>
+          <button class="act-btn" id="ttsToggleBtn" aria-pressed="false">🗣️ 政見語音</button>
+        </div>
+
+        <div class="dock-group">
+          <div class="stepwrap" id="wrapDance">
+            <button class="act-btn" id="btnDance">🕺 麥可舞步 ▾</button>
+            <div class="chips" id="chipsDance"></div>
+          </div>
+
+          <div class="stepwrap" id="wrapPolicy">
+            <button class="act-btn" id="btnPolicy">📢 選政見飛字 ▾</button>
+            <div class="chips" id="chipsPolicy"></div>
+          </div>
+
+          <button class="act-btn" id="btnNextPolicy">🚀 下一條 3D 政見</button>
+          <button class="act-btn" id="btnCrowdWave">🙌 萬頭鑽動尖叫</button>
+          <button class="act-btn" id="btnCryo">🥛 鮮奶冷霧</button>
+          <button class="act-btn" id="xrb" aria-pressed="false">🔍 透視結構</button>
+          <button class="act-btn" id="lblb" aria-pressed="false">🏷️ 標籤</button>
+          <button class="act-btn" id="openArchiveBtn">📋 政見與四年政績圖庫</button>
+        </div>
+      </div>
+
+      <!-- Secondary Row: Camera Zoom/View Presets + Palettes + Hand-drawn Wobble -->
+      <div class="sub-dock">
+        <div class="ctl-inline">
+          <label>🎥 3D 鏡頭 (可拖曳旋轉):</label>
+          <button class="act-btn" id="camFront" aria-pressed="true">舞台正面沈浸視角</button>
+          <button class="act-btn" id="camClose" aria-pressed="false">萬安舞台特寫</button>
+          <button class="act-btn" id="camIso" aria-pressed="false">Colorfigures 45° 等軸</button>
+          <button class="act-btn" id="camPit" aria-pressed="false">搖滾區仰角</button>
+          <button class="act-btn" id="camSpin" aria-pressed="false">360° 環繞</button>
+        </div>
+
+        <div class="ctl-inline">
+          <label>🎨 配色:</label>
+          <div class="dock-group" id="pals"></div>
+          <label for="wb" style="margin-left:6px;">✏️ 手繪抖動:</label>
+          <input id="wb" type="range" min="0" max="5" step="0.2" value="1.8">
+        </div>
       </div>
     </div>
+
   </div>
 
   <!-- Hidden HTML5 Audio Element for《台北安可》Looping Playback -->
@@ -691,24 +613,24 @@
     <div class="modal-card">
       <div class="modal-head">
         <div>
-          <h2 style="margin:0;color:var(--neon-gold);font-size:18px;">📁 2033 台北 AI 園區 × 都更再升級 × gov.taipei 四年施政成果資料庫</h2>
-          <p style="margin:4px 0 0;font-size:12px;color:var(--muted);">點擊下方任一政見卡片，舞台上的蔣萬安會立即用 3D 對話泡泡喊出該政見，並從畫面外飛入 3D 立體大字！</p>
+          <h2 style="margin:0;color:var(--neon-gold);font-size:17px;">📁 2033 台北 AI 園區 × 都更再升級 × gov.taipei 四年施政成果資料庫</h2>
+          <p style="margin:4px 0 0;font-size:11.5px;color:var(--muted);">點擊任一政見卡片，舞台上的蔣萬安會立即用 3D 對話泡泡喊出該政見，並從畫面外飛入 3D 立體大字！</p>
         </div>
-        <button class="pill-btn pink" id="closeArchiveBtn">✕ 關閉</button>
+        <button class="act-btn pink" id="closeArchiveBtn">✕ 關閉</button>
       </div>
 
       <div class="flyer-grid">
         <div class="flyer-box">
-          <div style="font-weight:900;color:var(--neon-cyan);margin-bottom:6px;">📄 附圖一：都更心安・都更再升級（公辦都更 75%➔50%／大街廓 300%）</div>
+          <div style="font-weight:900;color:var(--neon-cyan);margin-bottom:6px;font-size:12px;">📄 附圖一：都更心安・都更再升級（公辦都更 75%➔50%／大街廓 300%）</div>
           <img src="assets/policy_renewal.jpg" alt="蔣萬安 都更再升級 公辦都更意願門檻75%降到50% 黃金十年政見圖">
         </div>
         <div class="flyer-box">
-          <div style="font-weight:900;color:var(--neon-gold);margin-bottom:6px;">📄 附圖二：產業心安・松山機場遷移打造 870 公頃台北 AI 園區</div>
+          <div style="font-weight:900;color:var(--neon-gold);margin-bottom:6px;font-size:12px;">📄 附圖二：產業心安・松山機場遷移打造 870 公頃台北 AI 園區</div>
           <img src="assets/policy_aipark.jpg" alt="蔣萬安 松山機場遷移 870公頃 打造台北AI園區 110公頃台北中央公園政見圖">
         </div>
       </div>
 
-      <h3 style="margin:0 0 10px;color:var(--neon-cyan);font-size:14px;">⚡ 點擊觸發舞台 3D 飛字與群眾歡呼：</h3>
+      <h3 style="margin:0 0 10px;color:var(--neon-cyan);font-size:13.5px;">⚡ 點擊觸發舞台 3D 飛字與群眾歡呼：</h3>
       <div class="policy-list-grid" id="modalPolicyList"></div>
     </div>
   </div>
@@ -721,17 +643,58 @@
       const DATA = window.TAIPEI_2033_DATA;
       const ENG = window.AfterlifeEngine;
 
+      // Detect Safari / Mobile touch to optimize SVG filter & frame pacing automatically
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+      const isMobile = window.innerWidth <= 768 || matchMedia('(pointer:coarse)').matches;
+
+      // Bake SVG feTurbulence once into a static feImage so Safari/WebKit never recomputes Perlin noise on the CPU per frame!
+      function bakeDisplacementNoise() {
+        const turb = document.getElementById('turb');
+        if (!turb) return;
+        try {
+          const PW = 256, PH = 256;
+          const NS = 'http://www.w3.org/2000/svg';
+          const src = `<svg xmlns="${NS}" width="${PW}" height="${PH}" viewBox="0 0 ${PW} ${PH}"><filter id="n" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="1" seed="4"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>`;
+          const img = new Image();
+          img.onload = () => {
+            try {
+              const c = document.createElement('canvas');
+              c.width = PW;
+              c.height = PH;
+              const g = c.getContext('2d');
+              g.drawImage(img, 0, 0);
+              const px = g.getImageData(0, 0, PW, PH);
+              for (let i = 3; i < px.data.length; i += 4) px.data[i] = 255;
+              g.putImageData(px, 0, 0);
+              const url = c.toDataURL('image/png');
+              const feImg = document.createElementNS(NS, 'feImage');
+              feImg.setAttribute('x', '-20');
+              feImg.setAttribute('y', '-20');
+              feImg.setAttribute('width', '1000');
+              feImg.setAttribute('height', '600');
+              feImg.setAttribute('preserveAspectRatio', 'none');
+              feImg.setAttribute('result', 'warp');
+              feImg.setAttribute('href', url);
+              feImg.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', url);
+              if (turb.parentNode) turb.replaceWith(feImg);
+            } catch (_) {}
+          };
+          img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(src);
+        } catch (_) {}
+      }
+      bakeDisplacementNoise();
+
       // Scene State
       const st = {
         pal: 'afterlife',
         time: 0,
         xr: 0,
         xrTarget: 0,
-        labelsOn: true,
+        labelsOn: false, // Clean stage view by default; user can toggle 🏷️ 標籤 anytime
         hatOn: true,
-        mjMode: 'spin', // 'spin' | 'turbo' | 'lean' | 'moonwalk'
+        mjMode: 'spin',
         mjSpinAngle: 0,
-        mjSpinSpeed: 5.2,
+        mjSpinSpeed: 5.5,
         mjLeanAngle: 0,
         mjSlideY: 0,
         totalSpins: 1128,
@@ -756,16 +719,22 @@
       const statSpins = document.getElementById('statSpins');
       const lyricsTicker = document.getElementById('lyricsTicker');
       const eqSpans = [...document.querySelectorAll('#eqMini span')];
+      const wbInput = document.getElementById('wb');
+
+      // On mobile/Safari, default filter off for ultra-snappy 60fps; user can drag wobble slider anytime to enable
+      if (isSafari || isMobile) {
+        art.removeAttribute('filter');
+        wbInput.value = '0';
+      }
 
       let toastTimer = 0;
-      function flash(msg, ms = 2200) {
+      function flash(msg, ms = 2100) {
         toastEl.textContent = msg;
         toastEl.classList.add('show');
         clearTimeout(toastTimer);
         toastTimer = setTimeout(() => toastEl.classList.remove('show'), ms);
       }
 
-      // Optional TTS Voice Broadcast when Chiang Wan-an announces a policy
       function speakPolicy(text) {
         if (!st.ttsOn || !('speechSynthesis' in window)) return;
         try {
@@ -784,7 +753,7 @@
         st.cryo = 0.9;
         const pol = DATA.stagePolicies[st.policyIdx];
         statMain.textContent = pol.stats;
-        statSub.textContent = pol.category.split('・')[1] || pol.category;
+        if (statSub) statSub.textContent = pol.category.split('・')[1] || pol.category;
         if (announce) {
           flash(`📢 3D 政見飛入：${pol.flyText3D}`);
           speakPolicy(pol.speechBubble);
@@ -818,7 +787,6 @@
         if (!audioCtx) initWebAudio();
         if (!audioCtx) return;
         let step = 0;
-        // Pop-Punk / Cyberpunk Afterlife chord progression in C#m / A / E / B
         const bassNotes = [138.59, 138.59, 110.0, 110.0, 164.81, 164.81, 123.47, 123.47];
         const leadNotes = [554.37, 659.25, 440.0, 554.37, 659.25, 739.99, 493.88, 659.25];
         synthTimer = setInterval(() => {
@@ -872,13 +840,13 @@
           audioToggleBtn.textContent = '⏸️ 暫停《台北安可》';
           audioToggleBtn.classList.add('active');
           flash(mode === 'rchord' ? '🎸 正在無限輪播：《台北安可》謝和弦搖滾版' : '🎵 正在無限輪播：《台北安可》蔣萬安官方競選主題曲');
-        } catch (err) {
+        } catch (_) {
           isPlayingAudio = false;
-          audioToggleBtn.textContent = '🔊 點擊播放《台北安可》';
+          audioToggleBtn.textContent = '🔊 播放《台北安可》';
         }
       }
 
-      function toggleAudio() {
+      audioToggleBtn.onclick = () => {
         if (isPlayingAudio) {
           bgAudio.pause();
           stopSynthLoop();
@@ -888,15 +856,9 @@
         } else {
           playSelectedTrack();
         }
-      }
-
-      audioToggleBtn.onclick = toggleAudio;
-      trackSelect.onchange = () => {
-        if (isPlayingAudio) playSelectedTrack();
-        else playSelectedTrack();
       };
+      trackSelect.onchange = () => playSelectedTrack();
 
-      // Try auto-play on load, and unlock on first user interaction anywhere if browser policy blocked it
       playSelectedTrack();
       const unlockOnce = () => {
         if (!isPlayingAudio) playSelectedTrack();
@@ -906,7 +868,7 @@
       window.addEventListener('pointerdown', unlockOnce, { once: true });
       window.addEventListener('keydown', unlockOnce, { once: true });
 
-      // ---- Build Left Action Menus (Dance & Policies) ----
+      // ---- Build Dock Menus (Dance & Policies) ----
       const danceModes = [
         { id: 'spin', label: '🌪️ MJ 360° 連續旋轉舞步 (Toe-Spin)' },
         { id: 'turbo', label: '⚡ 狂暴 1080° 氮氣加速旋轉 (Turbo)' },
@@ -980,10 +942,7 @@
         }
       };
 
-      document.getElementById('btnNextPolicy').onclick = () => {
-        triggerPolicy(st.policyIdx + 1, true);
-      };
-
+      document.getElementById('btnNextPolicy').onclick = () => triggerPolicy(st.policyIdx + 1, true);
       document.getElementById('btnCrowdWave').onclick = () => {
         st.cheerBaseIdx = (st.cheerBaseIdx + 1) % DATA.crowdCheers.length;
         st.cheerAge = 0;
@@ -991,28 +950,28 @@
         const c = DATA.crowdCheers[st.cheerBaseIdx];
         flash(`🙌 群眾尖叫感謝：${c.policy}！`);
       };
-
       document.getElementById('btnCryo').onclick = () => {
         st.cryo = 1.0;
         flash('🥛 生生喝鮮乳！低溫氮氣冷霧全開！');
       };
 
-      // TTS Toggle
       const ttsBtn = document.getElementById('ttsToggleBtn');
       ttsBtn.onclick = () => {
         st.ttsOn = !st.ttsOn;
         ttsBtn.setAttribute('aria-pressed', st.ttsOn);
-        ttsBtn.textContent = st.ttsOn ? '🗣️ 政見語音: 開' : '🗣️ 政見語音: 關';
         ttsBtn.classList.toggle('active', st.ttsOn);
         if (st.ttsOn) speakPolicy(DATA.stagePolicies[st.policyIdx].speechBubble);
       };
 
-      // See-through & Labels Toggles
       const xrb = document.getElementById('xrb');
       const lblb = document.getElementById('lblb');
       xrb.onclick = () => {
         st.xrTarget = st.xrTarget ? 0 : 1;
         xrb.setAttribute('aria-pressed', !!st.xrTarget);
+        if (st.xrTarget && !st.labelsOn) {
+          st.labelsOn = true;
+          lblb.setAttribute('aria-pressed', 'true');
+        }
         flash(st.xrTarget ? '🔍 開啟 Colorfigures 透視結構：檢視舞台地下 AI 與磁浮機械！' : '🏢 恢復來生夜店實體舞台外觀');
       };
       lblb.onclick = () => {
@@ -1020,7 +979,7 @@
         lblb.setAttribute('aria-pressed', st.labelsOn);
       };
 
-      // Direct Click on 3D Scene Elements (data-act)
+      // Direct Click on 3D Scene Elements
       svg.addEventListener('pointerdown', e => {
         if (e.button) return;
         const a = e.target.closest('[data-act]');
@@ -1055,7 +1014,7 @@
       });
       svg.addEventListener('pointermove', e => {
         if (!drag) return;
-        const k = 260 / svg.getBoundingClientRect().width;
+        const k = 240 / svg.getBoundingClientRect().width;
         ENG.setCam(drag.yaw + (e.clientX - drag.x) * 0.65 * k, drag.pitch + (e.clientY - drag.y) * 0.4 * k);
       });
       const endDrag = () => {
@@ -1067,6 +1026,7 @@
 
       const camBtns = {
         front: document.getElementById('camFront'),
+        close: document.getElementById('camClose'),
         iso: document.getElementById('camIso'),
         pit: document.getElementById('camPit'),
         spin: document.getElementById('camSpin')
@@ -1076,24 +1036,31 @@
       }
       camBtns.front.onclick = () => {
         st.autoOrbit = false;
-        ENG.setPersp(0.0019);
-        ENG.setCam(0, 15.5);
+        ENG.setPersp(0.0022);
+        ENG.setCam(0, 12.5, 2.58);
         syncCamBtns('front');
-        flash('🎥 鏡頭：面對中央舞台 POV (背對尖叫群眾)');
+        flash('🎥 鏡頭：舞台正面沈浸視角');
+      };
+      camBtns.close.onclick = () => {
+        st.autoOrbit = false;
+        ENG.setPersp(0.0025);
+        ENG.setCam(0, 10.5, 3.15);
+        syncCamBtns('close');
+        flash('🔥 鏡頭：中央舞台蔣萬安近距離特寫');
       };
       camBtns.iso.onclick = () => {
         st.autoOrbit = false;
         ENG.setPersp(0);
-        ENG.setCam(42, 32);
+        ENG.setCam(42, 30, 2.25);
         syncCamBtns('iso');
         flash('📐 鏡頭：Colorfigures 經典 45° 等軸透視視角');
       };
       camBtns.pit.onclick = () => {
         st.autoOrbit = false;
-        ENG.setPersp(0.0023);
-        ENG.setCam(-10, 9.5);
+        ENG.setPersp(0.0026);
+        ENG.setCam(-8, 7.5, 2.75);
         syncCamBtns('pit');
-        flash('🔥 鏡頭：搖滾區第一排極限仰角');
+        flash('⚡ 鏡頭：搖滾區第一排極限仰角');
       };
       camBtns.spin.onclick = () => {
         st.autoOrbit = !st.autoOrbit;
@@ -1101,8 +1068,14 @@
       };
 
       // ---- Hand-Drawn Wobble Slider & Palette Swatches ----
-      document.getElementById('wb').oninput = e => {
-        document.getElementById('wob').setAttribute('scale', (+e.target.value).toFixed(2));
+      wbInput.oninput = e => {
+        const val = +e.target.value;
+        if (val <= 0.05) {
+          art.removeAttribute('filter');
+        } else {
+          art.setAttribute('filter', 'url(#hand)');
+          document.getElementById('wob').setAttribute('scale', val.toFixed(2));
+        }
       };
 
       const palsRow = document.getElementById('pals');
@@ -1121,7 +1094,7 @@
         palsRow.appendChild(b);
       });
 
-      // ---- Zoom Controls (Colorfigures .zchip) ----
+      // ---- Zoom Controls ----
       let zoomS = 1, zoomTx = 0, zoomTy = 0;
       const zwrap = document.getElementById('zwrap');
       const zpBtn = document.getElementById('zoomReset');
@@ -1146,8 +1119,8 @@
         zoomS = s2;
         applyZoom();
       }
-      document.getElementById('zoomIn').onclick = () => zoomAt(1.35, svg.clientWidth / 2, svg.clientHeight / 2);
-      document.getElementById('zoomOut').onclick = () => zoomAt(1 / 1.35, svg.clientWidth / 2, svg.clientHeight / 2);
+      document.getElementById('zoomIn').onclick = () => zoomAt(1.3, svg.clientWidth / 2, svg.clientHeight / 2);
+      document.getElementById('zoomOut').onclick = () => zoomAt(1 / 1.3, svg.clientWidth / 2, svg.clientHeight / 2);
       zpBtn.onclick = () => { zoomS = 1; applyZoom(); };
       zwrap.addEventListener('wheel', e => {
         if (e.ctrlKey || e.metaKey) {
@@ -1176,37 +1149,45 @@
         if (e.target === archiveModal) archiveModal.classList.remove('open');
       });
 
-      // ---- URL Params Support for Verification & Direct States ----
+      // ---- URL Params Support ----
       const q = new URLSearchParams(location.search);
       if (q.has('yaw') || q.has('pitch')) {
-        ENG.setCam(+(q.get('yaw') || 0), +(q.get('pitch') || 15.5));
+        ENG.setCam(+(q.get('yaw') || 0), +(q.get('pitch') || 12.5));
       }
       if (q.get('xr') === '1') {
         st.xr = st.xrTarget = 1;
+        st.labelsOn = true;
         xrb.setAttribute('aria-pressed', 'true');
+        lblb.setAttribute('aria-pressed', 'true');
+      }
+      if (q.get('labels') === '1') {
+        st.labelsOn = true;
+        lblb.setAttribute('aria-pressed', 'true');
       }
       if (q.get('pal') && ENG.PALS[q.get('pal')]) {
         st.pal = q.get('pal');
         document.body.classList.toggle('paper-mode', st.pal === 'paper');
       }
 
-      // ---- Main 60FPS Animation Driver ----
+      // ---- Main Animation Driver (Adaptive Frame Pacing for Safari/Mobile) ----
       let lastNow = performance.now();
+      let lastRenderNow = 0;
       let frameCount = 0;
-      const maxShotFrames = q.has('shot') ? (+q.get('shot') || 20) : Infinity;
+      const maxShotFrames = q.has('shot') ? (+q.get('shot') || 25) : Infinity;
+      // On Safari/Mobile, 30fps SVG DOM commit (~32ms interval) feels silky smooth and halves CPU load
+      const minRenderInterval = (isSafari || isMobile) && !q.has('shot') ? 28 : 14;
+
       function tick(now) {
         frameCount++;
         const dt = Math.min(0.05, Math.max(0.016, (now - lastNow) / 1000));
         lastNow = now;
         st.time += dt;
 
-        // Smooth See-through transition
         if (Math.abs(st.xrTarget - st.xr) > 0.005) {
-          st.xr += Math.sign(st.xrTarget - st.xr) * dt * 1.6;
+          st.xr += Math.sign(st.xrTarget - st.xr) * dt * 1.8;
           st.xr = Math.max(0, Math.min(1, st.xr));
         }
 
-        // Beat detection from WebAudio Analyser (or procedural 132 BPM Pop-Punk beat of《台北安可》)
         let audioBeat = 0;
         if (analyser && isPlayingAudio && trackSelect.value !== 'synth') {
           analyser.getByteFrequencyData(dataArray);
@@ -1214,24 +1195,19 @@
           for (let i = 0; i < 8; i++) sum += dataArray[i];
           audioBeat = Math.min(1, sum / (8 * 215));
         } else {
-          // 132 BPM procedural beat pulse
           const beatPhase = (st.time * (132 / 60)) % 1;
           audioBeat = Math.pow(Math.max(0, 1 - beatPhase * 2.5), 2);
         }
         st.beatPulse = Math.max(audioBeat, st.beatPulse * Math.pow(0.15, dt));
 
-        // Update mini equalizer bars in top lyrics ticker
         eqSpans.forEach((sp, i) => {
-          const h = 4 + 12 * Math.abs(Math.sin(st.time * 8 + i * 0.9)) * (0.45 + 0.55 * st.beatPulse);
+          const h = 4 + 9 * Math.abs(Math.sin(st.time * 8 + i * 0.9)) * (0.45 + 0.55 * st.beatPulse);
           sp.style.height = h.toFixed(1) + 'px';
         });
 
-        // Decay cryo jet
         if (st.cryo > 0) st.cryo = Math.max(0, st.cryo - dt * 0.55);
 
-        // Chiang Wan-an Michael Jackson Dance Choreography
         if (st.mjMode === 'spin') {
-          // Classic MJ rhythmic spin burst + short pose freeze every 4.5s
           const cycle = st.time % 4.5;
           st.mjSpinSpeed = cycle < 3.4 ? 6.8 : 0.6;
           st.mjSpinAngle += st.mjSpinSpeed * dt;
@@ -1242,7 +1218,6 @@
           st.mjSpinAngle += st.mjSpinSpeed * dt;
           st.mjLeanAngle *= Math.pow(0.05, dt);
         } else if (st.mjMode === 'lean') {
-          // 45-degree Smooth Criminal Anti-Gravity Lean + slow spin
           st.mjSpinSpeed = 2.2;
           st.mjSpinAngle += st.mjSpinSpeed * dt;
           const targetLean = 0.52 * Math.sin(st.time * 2.4);
@@ -1254,26 +1229,20 @@
           st.mjLeanAngle *= Math.pow(0.05, dt);
         }
 
-        // Update spin counter
         const newSpins = 1128 + Math.floor(st.mjSpinAngle / (2 * Math.PI));
-        if (statSpins.textContent !== `${newSpins.toLocaleString()} 圈`) {
-          statSpins.textContent = `${newSpins.toLocaleString()} 圈`;
+        if (statSpins.textContent !== `${newSpins.toLocaleString()}圈`) {
+          statSpins.textContent = `${newSpins.toLocaleString()}圈`;
         }
 
-        // Auto-cycle 3D Flying Policy Slogans every 6.2 seconds
         st.policyAge += dt;
-        if (st.policyAge > 6.2) {
-          triggerPolicy(st.policyIdx + 1, false);
-        }
+        if (st.policyAge > 6.2) triggerPolicy(st.policyIdx + 1, false);
 
-        // Auto-cycle Crowd Gratitude Speech Bubbles every 4.2 seconds
         st.cheerAge += dt;
         if (st.cheerAge > 4.2) {
           st.cheerAge = 0;
           st.cheerBaseIdx = (st.cheerBaseIdx + 1) % DATA.crowdCheers.length;
         }
 
-        // Auto-cycle《台北安可》Lyrics Ticker every 4.8 seconds
         st.lyricAge += dt;
         if (st.lyricAge > 4.8) {
           st.lyricAge = 0;
@@ -1281,14 +1250,16 @@
           lyricsTicker.textContent = DATA.lyrics[st.lyricIdx];
         }
 
-        // Optional 360 camera turntable
         if (st.autoOrbit && !drag) {
           const c = ENG.getCam();
           ENG.setCam(c.yaw + dt * 22, c.pitch);
         }
 
-        // Render 3D Colorfigures × Afterlife Scene
-        art.innerHTML = ENG.renderScene(st);
+        if (now - lastRenderNow >= minRenderInterval || drag || q.has('shot')) {
+          lastRenderNow = now;
+          art.innerHTML = ENG.renderScene(st);
+        }
+
         if (frameCount < maxShotFrames) requestAnimationFrame(tick);
       }
 
